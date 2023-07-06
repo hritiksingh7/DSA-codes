@@ -1,0 +1,75 @@
+#include<unordered_map>
+#include<list>
+
+void solve(unordered_map<int, list<int>> &adj, vector<int> &disc, vector<int> &low,
+           vector<bool> &visited, int parent, int time, vector<vector<int>> &ans, int node){
+
+        visited[node] = 1;
+        disc[node] = time;
+        low[node] = time;
+
+// iterating recursively for all the neighbours
+        for(auto neighbour: adj[node]){
+
+            // if not visited, recursion keeps running
+            if(visited[neighbour] == 0){
+                solve(adj, disc, low, visited, node, time+1, ans, neighbour);
+
+                // backtracking
+
+                // update your own low if the low of your child gets updated, if backedge exisits
+                low[node] = min(low[node], low[neighbour]);
+
+                // check for bridge condition
+                if(low[neighbour] > disc[node]){
+                    vector<int> vec;
+                    vec.push_back(node);
+                    vec.push_back(neighbour);
+                    ans.push_back(vec);
+                }
+            }
+            else{
+                if(neighbour == parent){
+                    continue;
+                }
+                else{
+                    // presence of a back edge
+                    low[node] = min(low[node], disc[neighbour]);
+                }
+            }
+        }
+    }
+
+
+vector<vector<int>> findBridges(vector<vector<int>> &edges, int v, int e) {
+    // Write your code here'
+
+    // prepare adj list
+    unordered_map<int, list<int>> adj;
+
+    for(int i=0; i<e; i++){
+        int u = edges[i][0];
+        int v = edges[i][1];
+
+        adj[u].push_back(v);
+        adj[v].push_back(u);
+    }
+
+
+// creating data structures to keep track
+    vector<int> disc(v, -1);
+    vector<int> low(v, -1);
+    vector<bool> visited(v, 0);
+    int parent = -1;
+    int time = 0;
+    vector<vector<int>> ans;
+    int node = 0;
+
+    // run a loop if it is a disconnected graph, but here it is connected
+    for(int i=0; i<1; i++){
+        if(visited[i] == 0){
+            solve(adj, disc, low, visited, parent, time, ans, node);
+        }
+    }
+
+    return ans;
