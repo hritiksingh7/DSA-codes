@@ -1,0 +1,39 @@
+    int findK(int a[MAX][MAX],int n,int m,int k)
+    {
+ 		// Your code goes here.
+ 		int left=0, right=m-1;
+ 		int top=0, bottom=n-1;
+ 		int count = 0;
+ 		int ans = -1;
+ 		
+ 		while(count < n*m){
+ 		    
+ 		    for(int i=left; i<=right&& count < n*m; i++){
+ 		        count++;
+ 		        if(count == k)
+ 		        return a[top][i];
+ 		    }
+ 		    top++;
+ 		    
+ 		    for(int i=top; i<=bottom && count < n*m; i++){
+ 		        count++;
+ 		        if(count == k)
+ 		        return a[i][right];
+ 		    }
+ 		    right--;
+ 		    
+ 		    for(int i=right; i>=left && count < n*m; i--){
+ 		        count++;
+ 		        if(count==k)
+ 		        return a[bottom][i];
+ 		    }
+ 		    bottom--;
+ 		    
+ 		    for(int i=bottom; i>=top && count < n*m; i--){
+ 		        count++;
+ 		        if(count==k)
+ 		        return a[i][left];
+ 		    }
+ 		    left++;
+ 		}
+    }
