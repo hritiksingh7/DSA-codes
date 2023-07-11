@@ -1,0 +1,33 @@
+void solve(ListNode* root, int n, int &count, bool &flag){
+    if(root == NULL)
+    return;
+
+    solve(root->next, n, count, flag);
+
+    if(count == n){
+        flag = 1;
+        ListNode* node = root->next;
+        root->next = node->next;
+        node->next = NULL;
+        delete node;
+    }
+
+    count++;
+}
+
+
+ListNode* removeNthFromEnd(ListNode* head, int n) {
+    if(head == NULL || head->next == NULL)
+    return NULL;
+
+    ListNode* root = head;
+    int count = 0;
+    bool flag = 0;
+
+    solve(root, n, count, flag);
+
+    if(!flag)
+    return head->next;
+
+    return head;
+}
