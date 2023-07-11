@@ -1,0 +1,20 @@
+ long long power(int N,int M)
+    {
+       //Your code here
+       int m = 1e9+7;
+       int num = M;
+       long long base = N;
+       
+       long long ans = 1;
+       
+       while(num){
+          if(num&1)
+          ans = ((ans%m)*(base%m))%m;
+          
+          base = ((base%m)*(base%m))%m;
+          num/=2;
+       }
+       
+       return ans;
+        
+    }
