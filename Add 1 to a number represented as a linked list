@@ -1,0 +1,29 @@
+int solve(Node* root){
+        if(root == NULL)
+        return 1;
+        
+        int carry = solve(root->next);
+        
+        if(root->data == 9 && carry){
+            root->data = 0;
+            return 1;
+        }
+        else{
+            root->data += carry;
+            return 0;
+        }
+    }
+    Node* addOne(Node *head) 
+    {
+        // Your Code here
+        // return head of list after adding one
+        int carry = solve(head);
+        
+        if(carry){
+            Node* newHead = new Node(1);
+            newHead->next = head;
+            return newHead;
+        }
+        
+        return head;
+    }
