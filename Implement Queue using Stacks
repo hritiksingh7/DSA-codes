@@ -1,0 +1,49 @@
+class MyQueue {
+public:
+    stack<int> st;
+    MyQueue() {
+        
+    }
+    
+    void push(int x) {
+        if(st.empty())
+        st.push(x);
+        else
+        recPush(x);
+    }
+    
+    int pop() {
+        if(st.empty())
+        return -1;
+        else{
+            int top = st.top();
+            st.pop();
+            return top;
+        }
+    }
+    
+    int peek() {
+        if(st.empty())
+        return -1;
+        else
+        return st.top();
+    }
+    
+    bool empty() {
+        return st.empty();
+    }
+
+    void recPush(int x){
+        if(st.empty()){
+            st.push(x);
+            return;
+        }
+
+        int num = st.top();
+        st.pop();
+
+        recPush(x);
+
+        st.push(num);
+    }
+};
