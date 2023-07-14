@@ -1,0 +1,31 @@
+    void solve(stack<int> &s, int middle, int count){
+        
+        count++;
+        
+        if(count == middle){
+            s.pop();
+            return;
+        }
+        
+        
+        int num = s.top();
+        s.pop();
+        
+        solve(s, middle, count);
+        
+        s.push(num);
+    }
+    void deleteMid(stack<int>&s, int sizeOfStack)
+    {
+        // code here.. 
+        int count = 0;
+        int middle;
+        
+        if(sizeOfStack&1)
+        middle = (sizeOfStack+1)/2;
+        else
+        middle = (sizeOfStack/2)+1;
+        
+        solve(s, middle, count);
+        
+    }
