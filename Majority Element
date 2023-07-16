@@ -1,0 +1,42 @@
+    int majorityElement(int a[], int size)
+    {
+        
+        // // your code here
+        // int maxCnt=0, num=0;
+        // unordered_map<int, int> mp;
+        
+        // for(int i=0; i<size; i++){
+        //     mp[a[i]]++;
+            
+        //     if(mp[a[i]] > size/2){
+        //         return a[i];
+        //     }
+        // }
+        
+        // return -1;
+        
+        int cnt = 1, maxFreq = a[0];
+        
+        for(int i=1; i<size; i++){
+            if(cnt == 0)
+            maxFreq = a[i];
+            
+            if(a[i] == maxFreq)
+            cnt++;
+            else
+            cnt--;
+        }
+        
+        cnt = 0;
+        
+        for(int i=0; i<size; i++){
+            if(a[i] == maxFreq)
+            cnt++;
+        }
+        
+        if(cnt > size/2)
+        return maxFreq;
+        
+        return -1;
+        
+    }
