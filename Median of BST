@@ -1,0 +1,106 @@
+float solve(Node* root, int medianIndex, int &currIndex){
+    
+    if(root == NULL)
+    return 0;
+    
+    float left = solve(root->left, medianIndex, currIndex);
+    
+    currIndex++;
+    
+    if(currIndex == medianIndex)
+    return root->data;
+    
+    float right = solve(root->right, medianIndex, currIndex);
+    
+    if(left)
+    return left;
+    else if(right)
+    return right;
+    else 
+    return 0;
+}
+
+float solveEven(Node* root, int medianIndex, int &currIndex, int &currAns){
+    
+    if(root == NULL)
+    return 0;
+    
+    float left = solveEven(root->left, medianIndex, currIndex, currAns);
+    
+    currIndex++;
+    
+    if(currIndex == medianIndex)
+    currAns += root->data;
+    
+    
+    if(currIndex == medianIndex+1){
+        currAns+=root->data;
+        float ans = (1.0f * currAns/2);
+        return ans;
+    } 
+    
+    float right = solveEven(root->right, medianIndex, currIndex, currAns);
+    
+    if(left)
+    return left;
+    else if(right)
+    return right;
+    else 
+    return 0;
+}
+
+
+int totalCount(Node* root){
+    if(root == NULL)
+    return 0;
+    
+    return (1 + totalCount(root->left) + totalCount(root->right));
+}
+
+float findMedian(struct Node *root)
+{
+      //Code here
+      if(root == NULL)
+      return -1;
+      
+      int totalNodes = totalCount(root);
+      int medianIndex = (totalNodes+1)/2;
+      int currIndex = 0;
+      int currAns = 0;
+      
+      if(totalNodes&1){
+          return solve(root, medianIndex, currIndex);
+      }
+      else{
+          return solveEven(root, medianIndex, currIndex, currAns);
+      }
+}
+
+
+// void printInorder(struct Node* root,vector<int> &arr)
+// {
+//     if (root == NULL)
+//         return ;
+ 
+//     // First recur on left subtree
+//     printInorder(root->left,arr);
+ 
+//     // Now deal with the node
+//     arr.push_back(root->data);
+ 
+//     // Then recur on right subtree
+//     printInorder(root->right,arr);
+// }
+// float findMedian(struct Node *root)
+// {
+//       //Code here
+//       vector<int> arr(0);
+//       printInorder(root,arr);
+//       int size=arr.size();
+      
+//       if(size%2==0)
+//       return (arr[(size/2)-1]+arr[(size/2)])/2.0;
+//       else
+//       return arr[((size+1)/2)-1];
+      
+// }
