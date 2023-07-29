@@ -1,0 +1,29 @@
+Node * inOrderSuccessor(Node *root, Node *x)
+    {
+        //Your code here
+        Node* ans = NULL;
+        
+        Node* curr = root;
+        
+        while(curr != x){
+            if(x->data > curr->data){
+                curr = curr->right;
+            }
+            else if(x->data < curr->data){
+                ans = curr;
+                curr = curr->left;
+            }
+        }
+        
+        if(curr->right == NULL)
+        return ans;
+        
+        curr = curr->right;
+        
+        while(curr->left)
+        curr = curr->left;
+        
+        return curr;
+        
+        
+    }
