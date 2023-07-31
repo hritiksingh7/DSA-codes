@@ -1,0 +1,23 @@
+void dfs(unordered_map<int, bool> &vis, vector<int> &ans, vector<int> adj[], int curr){
+        
+        ans.push_back(curr);
+        
+        for(int i=0; i<adj[curr].size(); i++){
+            if(!vis[adj[curr][i]]){
+                vis[adj[curr][i]] = 1;
+                dfs(vis, ans, adj, adj[curr][i]);
+            }
+        }
+        
+    }
+    vector<int> dfsOfGraph(int V, vector<int> adj[]) {
+        // Code here
+        
+        unordered_map<int, bool> vis;
+        vector<int> ans;
+        
+        vis[0] = 1;
+        dfs(vis, ans, adj, 0);
+        
+        return ans;
+    }
