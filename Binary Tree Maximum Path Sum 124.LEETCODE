@@ -1,0 +1,28 @@
+pair<int, int> solve(TreeNode* root){
+    if(!root){
+        return make_pair(INT_MIN, 0);
+    }
+
+    auto left = solve(root->left);
+    auto right = solve(root->right);
+
+    int one = root->val;
+    int fTwo = root->val + left.second;
+    int lTwo = root->val + right.second;
+    int allThree = root->val + left.second + right.second;
+
+    int myContri = max(one, max(fTwo, lTwo));
+    int great = max(max(left.first, right.first), max(one, max(fTwo, max(lTwo, allThree))));
+    // int finalAns = max(max(left.first, right.first), max(one, max(fTwo, lTwo)));
+
+    return make_pair(great, myContri);
+}
+    int maxPathSum(TreeNode* root) {
+        int finalAns = INT_MIN;
+        int myAns = INT_MIN;
+
+        auto ans = solve(root);
+
+        return ans.first;
+    }
+};
