@@ -1,0 +1,22 @@
+void put(stack<int> &St, queue<int> &q){
+    if(q.empty()) return;
+        
+        St.push(q.front());
+        q.pop();
+        
+        put(St,q);
+}
+void rev(stack<int> &St, queue<int> &q){
+    
+    if(St.empty()) return;
+        
+        q.push(St.top());
+        St.pop();
+        
+        rev(St,q);
+}
+    void Reverse(stack<int> &St){
+        queue<int> q;
+        rev(St, q);
+        put(St, q);
+    }
