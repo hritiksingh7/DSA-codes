@@ -1,0 +1,21 @@
+Given a string s, you choose some substring s[l...r] (1 ≤ l ≤ r ≤ |s|) exactly once and reverse it. For example, in the string geeks, select the substring s[2...4], after performing the mentioned operation, the new string will be gkees.
+
+Count the number of unique strings that can be obtained by doing this operation exactly once.
+
+long long int countStrings(string s){
+        // Your code goes here
+        long long c[26] = {0};
+        long long ans = 0;
+        
+        for(int i=0; i<s.length(); i++){
+            int index = s[i] - 'a';
+            c[index]++;
+        }
+        
+        for(int i=0; i<26; i++){
+            long long num = s.length() - c[i];
+            ans += (num * c[i]);
+        }
+        
+        return ans/2 + 1;
+    }
