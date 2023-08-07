@@ -1,0 +1,71 @@
+int countFractions(int n, int numerator[], int denominator[])
+    {
+        int ans=0;
+        map<pair<int,int>,int>m;
+        for(int i=0;i<n;i++){
+            
+            int divide=__gcd(numerator[i],denominator[i]);
+            
+            if(numerator[i]==denominator[i]) continue;
+            
+            int up=numerator[i]/divide;
+            int down=denominator[i]/divide;
+            int need_up=down-up;
+            
+            if(m[{need_up,down}]) 
+            ans+=m[{need_up,down}];
+            
+            m[{up,down}]++;
+        }
+        // vector<float> res(0, n);
+        
+        // for(int i=0; i<n; i++){
+        //     float a = ((numerator[i]*1.0)/(denominator[i]*1.0));
+        //     res.push_back(a);
+        // }
+        
+        // sort(res.begin(), res.end());
+        
+        // int i=0, j=1;
+        
+        // while(i<n-1){
+        //     float sum = res[i] + res[j];
+            
+        //     if(res[i] + res[i+1] > 1)
+        //     break;
+            
+        //     if(sum == 1){
+        //         ans++;
+        //         j++;
+        //     }
+        //     else if(sum > 1){
+        //         i++;
+        //         j = i+1;
+        //     }
+        //     else{
+        //         j++;
+        //     }
+            
+        //     if(j == n){
+        //         i++;
+        //         j = i+1;
+        //     }
+        // }
+        
+        
+        
+        
+        // for(int i=0; i<n; i++){
+        //     float a = ((numerator[i]*1.0)/(denominator[i]*1.0));
+        //     for(int j=i+1; j<n; j++){
+        //         float b = ((numerator[j]*1.0)/(denominator[j]*1.0));
+                
+        //         if(a+b == 1)
+        //         ans++;
+                
+        //         // cout<<a<<" "<<b<<" "<<a+b<<endl;
+        //     }
+        // }
+        
+        return ans;
+    }
