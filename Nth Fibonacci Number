@@ -1,0 +1,18 @@
+int solve(int n, vector<int> &dp, int mod){
+      if(n==1 || n==2)
+      return dp[n-1] = 1;
+      
+      if(dp[n-1] != -1)
+      return dp[n-1];
+      
+      return dp[n-1] = (solve(n-1, dp, mod)%mod + solve(n-2, dp, mod)%mod)%mod;
+  }
+    int nthFibonacci(int n){
+        // code here
+        vector<int> dp(n, -1);
+        int mod = 1000000007;
+        
+        int ans = solve(n, dp, mod);
+        
+        return ans;
+    }
