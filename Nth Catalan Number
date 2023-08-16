@@ -1,0 +1,48 @@
+long long solve(int n, vector<long long>&dp, int mod){
+        if(dp[n] != 0)
+        return dp[n];
+        
+        for(int j=0; j<n; j++){
+            dp[n] += (solve(j,dp,mod)*solve(n-1-j,dp,mod))%mod;
+            dp[n]%=mod;
+        }
+        return dp[n];
+    }
+    int findCatalan(int n) 
+    {
+        //code here
+        vector<long long> dp(n+1, 0);
+        dp[0]=1; 
+        dp[1]=1;
+        int mod = 1000000007;
+        return solve(n, dp, mod);
+    //     int mod = 1000000007;
+        
+    //     long long int dp[n+1]={0};
+    //     dp[0]=1;
+    //     dp[1]=1;
+    //     if(n<=1)
+    //      return 1;
+        
+    // for(int i=2;i<=n;i++){
+    //     long long int sum=0;
+    //     int s=0;
+    //     int e=i-1;
+    //     while(s<=e){
+    //         if(s==e){
+    //             sum+=((dp[s]%mod)*(dp[s]%mod))%mod;
+    //         }
+    //         else{
+    //             sum+=(2*((dp[s]*dp[e])%mod)%mod);
+               
+    //         }
+    //         sum%=mod;
+    //         s++;
+    //         e--;
+    //     }
+    //     dp[i]=sum%mod;
+        
+    // }
+        
+    //   return dp[n];  
+    }
