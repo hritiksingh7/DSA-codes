@@ -1,0 +1,47 @@
+bool check(vector<vector<char>>grid, string word, int i, int j, int k1, int k2){
+        int len = word.length(), index=0;
+        
+        while(len--){
+            if(i<0 || i>=grid.size() || j<0 || j>=grid[0].size()) return 0;
+            
+            if(grid[i][j] != word[index]) return 0;
+            
+            i+=k1;
+            j+=k2;
+            index++;
+        }
+        
+        return 1;
+    }
+	vector<vector<int>>searchWord(vector<vector<char>>grid, string word){
+	    // Code here
+	    
+	    vector<vector<int>> ans;
+	    
+	    for(int i=0; i<grid.size(); i++){
+	        for(int j=0; j<grid[0].size(); j++){
+	            
+	            if(grid[i][j] == word[0]){
+	                for(int k1=-1; k1<=1; k1++){
+	                    bool flag = 0;
+	                    for(int k2=-1; k2<=1; k2++){
+	                        
+	                        if(k1==0 && k2==0) continue;
+	                        
+	                        bool valid = check(grid, word, i, j, k1, k2);
+	                        
+	                        if(valid){
+	                            flag = 1;
+	                            ans.push_back({i,j});
+	                            break;
+	                        } 
+	                    }
+	                    if(flag) break;
+	                }
+	            }
+	        }
+	    }
+	    
+	    sort(ans.begin(), ans.end());
+	    return ans;
+	}
