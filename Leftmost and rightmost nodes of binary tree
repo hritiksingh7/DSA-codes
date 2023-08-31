@@ -1,0 +1,23 @@
+void printCorner(Node *root)
+{
+    queue<Node*> q;
+    q.push(root);
+    int level = 0;
+    
+    while(!q.empty()){
+        int size = q.size();
+        level++;
+        
+        for(int i=0; i<size; i++){
+            Node* front = q.front();
+            q.pop();
+            
+            if(i==0) cout<<front->data<<" ";
+            if(i==size-1 && level != 1 && (size-1)) cout<<front->data<<" ";
+            
+            if(front->left) q.push(front->left);
+            if(front->right) q.push(front->right);
+        }
+    }
+
+}
