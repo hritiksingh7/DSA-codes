@@ -1,0 +1,30 @@
+Node *reverse (Node *root, int &i, int b[], int n)
+    {
+        if(!root) return NULL;
+        while(b[i] == 0 && i < n) i++;
+        if(i==n) return root;
+    
+        int k = b[i++];
+
+        Node* prev = NULL;
+        Node* curr = root;
+        Node* next = curr;
+        Node* currHead = curr;
+        
+        while(k-- && curr){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        currHead->next = reverse(curr, i, b, n);
+        
+        return prev;
+    }
+
+Node *getListAfterReverseOperation(Node *head, int n, int b[]){
+	// Write your code here.
+    int index = 0;
+    return reverse(head, index, b, n);
+}
