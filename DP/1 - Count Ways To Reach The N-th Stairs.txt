@@ -1,0 +1,50 @@
+// TOP DOWN || RECURSION + MEMOIZATION
+
+#define mod 1e9+7
+
+int solve(int nStairs, vector<int> &dp){
+    if(nStairs==0 || nStairs==1) return 1;
+    if(dp[nStairs] != -1) return dp[nStairs];
+
+    return dp[nStairs] = (solve(nStairs-1, dp) + solve(nStairs-2, dp))%mod;
+}
+
+int countDistinctWays(int nStairs) {
+    //  Write your code here.
+    vector<int> dp(nStairs+1, -1);
+    return solve(nStairs, dp);
+}
+
+
+
+// BOTTOM UP || TABULATION
+
+int countDistinctWays(int nStairs) {
+    //  Write your code here.
+    vector<int> dp(nStairs+1);
+    int mod = 1e9 + 7;
+
+    dp[0] = 1; dp[1] = 1;
+    for(int i=2; i<=nStairs; i++){
+        dp[i] = (dp[i-1]%mod + dp[i-2]%mod)%mod;
+    }
+
+    return dp[nStairs];
+}
+
+
+// MEMOIZATION
+
+int countDistinctWays(int nStairs) {
+
+    int prev2 = 1, prev1 = 1;
+    int currAns;
+
+    for(int i=2; i<=nStairs; i++){
+        currAns = (prev2 + prev1)%mod;
+        prev2 = prev1;
+        prev1 = currAns;
+    }    
+
+    return prev1;
+}
