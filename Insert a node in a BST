@@ -1,0 +1,44 @@
+Node* insert(Node* node, int data) {
+    
+        // Your code goes here
+        // if (node == NULL ) {
+            
+        //     return new Node(data) ;
+        // }
+        
+        // if (data < node -> data ){
+        //     // it will go in left of the tree ;
+        //     node -> left = insert(node -> left , data );
+        // }
+        // if (data > node -> data ){
+        //     // it will go in right of the tree
+        //     node -> right = insert(node -> right , data );
+        // }
+        // return node ;
+    
+        Node* root = node;
+        
+        
+        if (!node){
+        return new Node(data);
+        }
+        
+        while(root->left || root->right){
+            if(data > root->data){
+                if(root->right) root = root->right;
+                else break;
+            } 
+            else  if(data < root->data){
+                if(root->left) root = root->left;
+                else break;
+            } 
+            else{
+               return node; 
+            } 
+        }
+        Node* newNode = new Node(data);
+        if(data > root->data) root->right = newNode;
+        else  if(data < root->data) root->left = newNode;
+        
+        return node;
+    }
