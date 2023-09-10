@@ -1,0 +1,59 @@
+// TOP DOWN || RECURSION + MEMOIZATION
+
+#define mod 1e9+7
+
+int solve(int *arr, int n, vector<int> &dp){
+        if(n < 0) return 0;
+        if(n == 0) return arr[0];
+        if(dp[n] != -1) return dp[n];
+        
+        int incl = solve(arr, n-2, dp) + arr[n];
+        int excl = solve(arr, n-1, dp);
+        
+        return dp[n] = max(incl, excl);
+    }
+
+int findMaxSum(int *arr, int n) {
+
+	vector<int> dp(n, -1);
+        return solve(arr,n-1, dp);
+}
+
+
+
+
+// BOTTOM UP || TABULATION
+
+	int findMaxSum(int *arr, int n) {
+
+	    vector<int> dp(n);
+	    
+	    dp[0] = arr[0]; dp[1] = max(arr[1]+0, arr[0]);
+	    for(int i=2; i<n; i++){
+	        int incl = arr[i] + dp[i-2];
+	        int excl = dp[i-1] + 0;
+	        
+	        dp[i] = max(incl, excl);
+	    }
+	    
+	    return dp[n-1];
+	}
+
+
+
+
+// SPACE OPTIMIZATION
+
+int findMaxSum(int *arr, int n) {
+	    
+	    int prev1 = arr[0], prev2 = 0;
+	    
+	    for(int i=1; i<n; i++){
+	        int incl = arr[i] + prev2;
+	        int excl = prev1;
+	        prev2 = prev1;
+	        prev1 = max(incl, excl);
+	    }
+	    
+	    return prev1;
+	}
