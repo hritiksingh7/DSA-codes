@@ -1,0 +1,15 @@
+bool isLucky(int n) {
+        
+        int len = n;
+        int skip = 2;
+        
+        if(n%2==0) return false;
+        
+        while(skip <= len){
+            if(len%skip == 0) return false;
+            len -= len/skip;
+            skip++;
+        }
+        
+        return true;
+    }
