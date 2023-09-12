@@ -1,0 +1,27 @@
+string findLargest(int N, int S){
+        // code here
+        int maxSum = S;
+        string st = "";
+        
+        if(9*N < S || S == 0 && N != 1) return "-1";
+        
+        int digits = N;
+        
+        while(digits--){
+            
+            if(maxSum >= 9){
+                st.push_back('9');
+                maxSum -= 9;
+            }
+            else if(maxSum > 0){
+                char s = maxSum + '0';
+                st.push_back(s);
+                maxSum = 0;
+            }
+            else{
+                st.push_back('0');
+            }
+        }
+        
+        return st;
+    }
