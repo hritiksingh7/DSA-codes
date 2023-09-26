@@ -1,0 +1,29 @@
+ int closest3Sum(int A[], int N, int X)
+    {
+        // code here
+        sort(A, A+N);
+        int currMinDiff = INT_MAX;
+        int ans = INT_MIN;
+        
+        for(int i=0; i<N-2; i++){
+            int curr = A[i];
+            
+            int start = i+1, end = N-1;
+            
+            while(start < end){
+                int currSum = A[i] + A[start] + A[end];
+                
+                int diff = abs(currSum - X);
+                if(diff < currMinDiff){
+                   currMinDiff = diff;
+                   ans = currSum;
+                }
+                
+                if(currSum > X) end--;
+                else if(currSum < X) start++;
+                else return X;
+            }
+        }
+        
+        return ans;
+    }
