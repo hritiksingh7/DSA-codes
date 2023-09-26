@@ -1,0 +1,20 @@
+int subarraysWithSumK(vector < int > a, int b) {
+    // Write your code here
+    int n = a.size();
+    int cnt = 0;
+    unordered_map<int, int> mp;
+    int xr = 0;
+    mp[0]++;
+
+    for(int i=0; i<n; i++){
+       xr ^= a[i];
+
+       int x = xr^b;
+
+       if(mp[x]) cnt += mp[x];
+
+       mp[xr]++;
+    }
+
+    return cnt;
+}
