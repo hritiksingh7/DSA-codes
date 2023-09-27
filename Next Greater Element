@@ -1,0 +1,22 @@
+vector<long long> nextLargerElement(vector<long long> arr, int n){
+        // Your code here
+        priority_queue<long long, vector<long long>, greater<long long>> pq;
+        
+        vector<long long> ans;
+        ans.push_back(-1);
+        
+        pq.push(arr[n-1]);
+        
+        for(int i=n-2; i>=0; i--){
+            while(!pq.empty() && pq.top() <= arr[i]) pq.pop();
+            
+            if(pq.empty()) ans.push_back(-1);
+            else ans.push_back(pq.top());
+
+            pq.push(arr[i]);
+        }
+        
+        reverse(ans.begin(), ans.end());
+        return ans;
+        
+    }
