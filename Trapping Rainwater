@@ -1,0 +1,54 @@
+long long trappingWater(int arr[], int n){
+        // code here
+        // int i=0, j=n-1;
+        // long long ans = 0;
+        
+        // long long currMin = 0;
+        
+        // while(i<j){
+            
+        //     long long areaFactor = min(arr[i], arr[j])*1LL - currMin;
+        //     currMin = min(arr[i], arr[j])*1LL;
+        //     ans += ((j-i-1)*areaFactor);
+        //     // cout<<ans<<endl;
+            
+        //     while(i<j && arr[i] <= currMin){
+        //         i++;
+        //         if(arr[i] > 0 && i != j)
+        //         ans -= min(arr[i]*1LL, currMin);
+        //     }
+            
+        //     while(i<j && arr[j] <= currMin){
+        //         j--;
+        //         if(arr[j] && i!=j)
+        //         ans -= min(arr[j]*1LL, currMin);
+        //     }
+        // }
+        
+        // return ans;
+        
+        vector<int> left(n);
+        vector<int> right(n);
+        
+        int currMax = 0;
+        for(int i=0; i<n; i++){
+            currMax = max(currMax, arr[i]);
+            left[i] = currMax;
+        }
+        
+        currMax = 0;
+        
+        for(int i=n-1; i>=0; i--){
+            currMax = max(currMax, arr[i]);
+            right[i] = currMax;
+        }
+        
+        long long ans = 0;
+        
+        for(int i=0; i<n; i++){
+            ans += (min(left[i], right[i]) - arr[i])*1LL;
+        }
+        
+        return ans;
+        
+    }
