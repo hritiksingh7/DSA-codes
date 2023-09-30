@@ -1,0 +1,52 @@
+long long ans = 0;
+    // arr[]: Input Array
+    // N : Size of the Array arr[]
+    // Function to count inversions in the array.
+    
+    void merge(long long arr[], long long l, long long m, long long r)
+    {
+         // Your code here
+         long long size1 = m-l+1, size2=r-m;
+         vector<long long> v1(size1);
+         vector<long long> v2(size2);
+         
+         long long mainIndex = l;
+         for(long long i=0; i<size1; i++) v1[i] = arr[mainIndex++];
+         for(long long i=0; i<size2; i++) v2[i] = arr[mainIndex++];
+         
+         long long ind1=0, ind2=0;
+         mainIndex = l;
+         
+         while(ind1 < size1 && ind2 < size2){
+             if(v1[ind1] <= v2[ind2]){
+                arr[l++] = v1[ind1++]; 
+             } 
+             else{
+                 ans += size1 - ind1;
+                 arr[l++] = v2[ind2++];
+             }     
+         }
+         
+         while(ind1 < size1) arr[l++] = v1[ind1++];
+         while(ind2 < size2) arr[l++] = v2[ind2++];
+    }
+    
+    void mergeSort(long long arr[], long long l, long long r)
+    {
+        //code here
+        if(l >= r) return;
+        
+        long long mid = l + (r-l)/2;
+        
+        mergeSort(arr, l, mid);
+        mergeSort(arr, mid+1, r);
+        merge(arr, l, mid, r);
+    }
+    
+    long long int inversionCount(long long arr[], long long N)
+    {
+        // Your Code Here
+        mergeSort(arr, 0, N-1);
+        return ans;
+        
+    }
