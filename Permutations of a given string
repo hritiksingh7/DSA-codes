@@ -1,0 +1,29 @@
+private:
+    void solve(string S, vector<string> &ans, int index, unordered_map<string, bool> &vis){
+        if(index >= S.size()){
+            
+            if(!vis[S])
+            ans.push_back(S);
+            
+            vis[S] = 1;
+            return;
+        }
+        
+        for(int j=index; j<S.size(); j++){
+            swap(S[index], S[j]);
+            solve(S, ans, index+1, vis);
+            
+            // backtrack
+            swap(S[index], S[j]);
+        }
+    }
+	public:
+		vector<string>find_permutation(string S)
+		{
+		    // Code here there
+		    vector<string> ans;
+		    int index = 0;
+		    unordered_map<string, bool> vis;
+		    solve(S, ans, index, vis);
+		    return ans;
+		}
