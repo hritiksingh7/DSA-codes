@@ -1,0 +1,35 @@
+vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) 
+    {
+        // code here 
+        int leftCol=0, rightCol=c-1, topRow=0, bottomRow=r-1;
+        vector<int> ans;
+        
+        while(topRow<=bottomRow || leftCol<=rightCol){
+            if(topRow<=bottomRow){
+                for(int i=leftCol; i<=rightCol; i++)
+                ans.push_back(matrix[topRow][i]);
+                topRow++;
+            }
+            
+            if(leftCol<=rightCol){
+                for(int i=topRow; i<=bottomRow; i++)
+                ans.push_back(matrix[i][rightCol]);
+                rightCol--;
+            }
+            
+            if(topRow<=bottomRow){
+                for(int i=rightCol; i>=leftCol; i--)
+                ans.push_back(matrix[bottomRow][i]);
+                bottomRow--;
+            }
+            
+            if(leftCol<=rightCol){
+                for(int i=bottomRow; i>=topRow; i--)
+                ans.push_back(matrix[i][leftCol]);
+                leftCol++;
+            }
+        }
+        
+        return ans;
+        
+    }
