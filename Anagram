@@ -1,0 +1,22 @@
+ bool isAnagram(string a, string b){
+        
+        // Your code here
+        int n1 = a.size(), n2=b.size();
+        if(n1 != n2) return false;
+        
+        vector<int> arr(26, 0);
+        
+        for(int i=0; i<n1; i++){
+            
+            int num1 = a[i]-'a';
+            arr[num1]++;
+            
+            int num2 = b[i]-'a';
+            arr[num2]--;
+        }
+        
+        for(int i=0; i<26; i++)
+        if(arr[i] != 0) return false;
+        
+        return true;
+    }
