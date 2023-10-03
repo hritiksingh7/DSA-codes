@@ -1,0 +1,32 @@
+int solveMem(string &s1, string &s2){
+        int m = s2.size();
+        vector<int> nextRow(m+1, 0);
+        vector<int> currRow(m+1, 0);
+        
+        for(int ind1=m-1; ind1>=0; ind1--){
+            for(int ind2=m-1; ind2>=0; ind2--){
+                
+                if(s1[ind1] == s2[ind2]){
+                    currRow[ind2] = 1 + nextRow[ind2+1];
+                }
+                else{
+                    // not same
+                    currRow[ind2] = max(nextRow[ind2], currRow[ind2+1]);
+                }
+            }
+            nextRow = currRow;
+        }
+        return nextRow[0];
+    }
+  public:
+    int countMin(string str){
+    //complete the function here
+        int n = str.size();
+        string s1 = str;
+        reverse(str.begin(), str.end());
+        string s2 = str;
+        
+        int longestPalin = solveMem(s1, s2);
+        
+        return n - longestPalin;
+    }
