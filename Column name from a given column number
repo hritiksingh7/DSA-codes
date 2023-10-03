@@ -1,0 +1,45 @@
+string colName (long long int n)
+    {
+        // your code here
+        // long long num = n;
+        // int currFactor = 0;
+        // string ans = "";
+        
+        // while(num){
+        //     long long curr = pow(26, currFactor);
+        //     long long next = pow(26, currFactor+1);
+            
+        //     long long currNum = num % next;
+        //     bool flag = 0;
+            
+        //     if(currNum == 0){
+        //         char ch = 'Z';
+        //         ans.push_back(ch);
+        //         num -= next;
+        //     }
+        //     else{
+        //         int currPos = currNum/curr;
+        //         char currChar = currPos - 1 + 'A';
+        //         ans.push_back(currChar);
+                
+        //         num -= (num%next);
+        //     }
+            
+        //     currFactor++;
+        // }
+        
+        // reverse(ans.begin(), ans.end());
+        // return ans;
+        
+        string ans = "";
+        
+        while(n--){
+            int currPos = n%26;
+            ans += (currPos + 'A');
+            n /= 26;
+        }
+        
+        reverse(ans.begin(), ans.end());
+        return ans;
+        
+    }
