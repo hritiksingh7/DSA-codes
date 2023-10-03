@@ -1,0 +1,17 @@
+ unordered_map<char, int> mp;
+        int n = s.length();
+        vector<int> dp(n+1);
+        dp[0] = 1;
+        
+        for(int i=1; i<=n; i++){
+            dp[i] = (dp[i-1]*2)%MOD;
+            char ch = s[i-1];
+            if(mp[ch]){
+                int index = mp[ch];
+                dp[i] = (dp[i] - dp[index-1])%MOD;
+            }
+            dp[i] %= MOD;
+            mp[ch] = i;
+        }
+        
+        return (dp[n]+MOD)%MOD;
