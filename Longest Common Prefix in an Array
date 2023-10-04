@@ -1,0 +1,36 @@
+ public:
+    string findPrefix(string s1, string s2){
+        int n1 = s1.size();
+        int n2 = s2.size();
+        int n = min(n1, n2);
+        
+        int ind=0;
+        string ans = "";
+        
+        while(ind<n){
+            if(s1[ind] == s2[ind]){
+                ans.push_back(s1[ind]);
+                ind++;
+            }
+            else{
+                break;
+            }
+        }
+        
+        return ans;
+    }
+    
+    string longestCommonPrefix (string arr[], int N)
+    {
+        // your code here
+        if(N==1) return arr[0];
+        
+        string longCommon = findPrefix(arr[0], arr[1]);
+        
+        for(int i=2; i<N; i++){
+            longCommon = findPrefix(longCommon, arr[i]);
+            if(longCommon.size() == 0) return "-1";
+        }
+        if(longCommon.size() == 0) return "-1";
+        return longCommon;
+    }
