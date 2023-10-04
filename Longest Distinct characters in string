@@ -1,0 +1,23 @@
+int longestSubstrDistinctChars (string S)
+{
+    // your code here
+    int n = S.size();
+    unordered_map<char, int> mp;
+
+    int ans = -1;
+    int i=0, j=1;
+    mp[S[0]] = 0;
+    while(j<n){
+        char currCh = S[j];
+        
+        if(mp[currCh] >= i){
+            if(mp[currCh] == 0 && currCh == S[0] || mp[currCh] > 0)
+            i = mp[currCh] + 1;
+        }
+
+        mp[currCh] = j++;
+        ans = max(ans, j - i);
+    }
+
+    return ans;
+}
