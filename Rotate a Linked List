@@ -1,0 +1,29 @@
+ public:
+    Node* findTail(Node* head){
+        while(head->next)
+        head = head->next;
+        
+        return head;
+    }
+    //Function to rotate a linked list.
+    Node* rotate(Node* head, int k)
+    {
+        // Your code here
+        Node* currTail = findTail(head);
+        Node* currHead = head;
+        
+        Node* prev = NULL;
+        Node* curr = head;
+        int num = k;
+        
+        while(num--){
+            prev = curr;
+            curr = curr->next;
+        }
+        
+        if(!curr) return head;
+        
+        currTail->next = currHead;
+        prev->next = NULL;
+        return curr;
+    }
