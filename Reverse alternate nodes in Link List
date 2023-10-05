@@ -1,0 +1,49 @@
+Node* reverse(Node* head){
+        Node* prev = NULL;
+        Node* curr = head;
+        Node* next = NULL;
+        
+        while(curr){
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        
+        return prev;
+        
+    }
+    void rearrange(struct Node *odd)
+    {
+        //add code here
+        
+        Node* curr1 = odd;
+        Node* curr2 = odd->next;
+        Node* next1 = NULL;
+        Node* next2 = NULL;
+        Node* prev1 = NULL;
+        
+        Node* head2 = curr2;
+        
+        
+        while(curr1){
+            prev1 = curr1;
+            next1 = curr2;
+            if(curr2){
+                next1 = curr2->next;
+                next2 = next1;
+                if(next1)
+                next2 = next1->next;
+            }
+            
+            curr1->next = next1;
+            if(curr2)
+            curr2->next = next2;
+            curr1 = next1;
+            curr2 = next2;
+        }
+        
+        Node* newHead = reverse(head2);
+        prev1->next = newHead;
+        // return odd;
+    }
